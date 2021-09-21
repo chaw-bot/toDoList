@@ -1,0 +1,48 @@
+body {
+  background-color: whitesmoke;
+}
+
+.container {
+  margin: 20%;
+  background-color: #fff;
+  box-shadow: 8px 8px 5px #d3d3d3;
+}
+
+.header {
+  display: flex;
+  padding: 1% 3% 1% 3%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input {
+  display: flex;
+  padding: 1% 3% 1% 3%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toDo {
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: italics, sans-serif;
+}
+
+.task {
+  display: flex;
+  padding: 1% 3% 1% 3%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clear {
+  text-align: center;
+  padding: 1% 3% 1% 3%;
+  background-color: whitesmoke;
+}
+
+hr {
+  margin: 0;
+}
