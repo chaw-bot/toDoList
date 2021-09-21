@@ -27,7 +27,7 @@ body {
   border-top: none;
   border-left: none;
   border-right: none;
-  font-style: 'italics', san-serif;
+  font-family: italics, sans-serif;
 }
 
 .task {
