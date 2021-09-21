@@ -4,7 +4,7 @@
 
 # Web Preview
 
-![screenshot](./todo.png)
+![screenshot](todo.png)
 
 
 ## Built With
@@ -15,7 +15,7 @@
 
 ## Live Demo
 
-[Live Demo]()
+[Live Demo](https://chaw-bot.github.io/toDoList/dist/)
 
 # Install Instruction
 1. Open your terminal and `cd` to a proper location.

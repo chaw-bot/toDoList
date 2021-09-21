@@ -28,6 +28,8 @@
     "webpack-dev-server": "^4.2.1"
   },
   "dependencies": {
+    "gh-pages": "^3.2.3",
     "lodash": "^4.17.21"
-  }
+  },
+  "_id": "todolist@1.0.0"
 }
