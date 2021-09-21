@@ -1,6 +1,6 @@
 import './style.css';
 
-//call list
+// call list
 const list = document.querySelector('.list');
 
 // task array of objects
@@ -24,10 +24,10 @@ const toDoList = [
 
 // populate list
 const populate = () => {
-  //sort the array
+  // sort the array
   const sortedList = toDoList.sort((x, y) => x.index - y.index);
 
-  //iterate
+  // iterate
   for (let i = 0; i < sortedList.length; i += 1) {
     list.insertAdjacentHTML('beforeend', `
       <div class="task">
@@ -43,6 +43,6 @@ const populate = () => {
       <hr>
     `);
   }
-}
+};
 
 window.onload = populate();
