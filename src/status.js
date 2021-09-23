@@ -1,42 +1,34 @@
-import { getFromLocalStorage, setToLocalStorage } from './store';
+import { setToLocalStorage } from './store';
 
-const checkEvent = () => {
-  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+const sortIndex = (list) => {
+  for (let i = 0; i < list.length; i += 1) {
+    list[i].index = i;
+  }
+  return list;
+};
 
-  for (let i = 0; i < checkboxes.length; i += 1) {
-    const task = checkboxes[i].nextElementSibling;
+const generateTodoList = () => {
+  const list = document.getElementsByClassName('task');
+  const toDoList = [];
+  for (let i = 0; i < list.length; i += 1) {
+    const description = list[i].children[0].children[1].innerText;
+    const completed = list[i].children[0].children[0].checked;
+    const index = list[i].children[0].children[0].name.split('-')[1];
 
-    checkboxes[i].addEventListener('click', () => {
-      if (checkboxes[i].checked) {
-        task.style.textDecoration = 'line-through';
-      } else {
-        task.style.textDecoration = 'none';
-      }
-      const toDoList = getFromLocalStorage();
-      toDoList[i].completed = checkboxes[i].checked;
-      setToLocalStorage(toDoList);
+    toDoList.push({
+      description,
+      completed,
+      index,
     });
   }
+  return toDoList;
 };
 
-const checkboxState = () => {
-  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+const refreshStore = () => {
+  const todoList = generateTodoList();
+  const sortedList = sortIndex(todoList);
 
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      localStorage.setItem(checkbox.id, 'checked');
-    } else {
-      localStorage.setItem(checkbox.id, 'unchecked');
-    }
-  });
-
-  checkboxes.forEach((checkbox) => {
-    if (localStorage.getItem(checkbox.id) === 'checked') {
-      checkbox.checked = true;
-    } else {
-      checkbox.checked = false;
-    }
-  });
+  setToLocalStorage(sortedList);
 };
 
-export { checkEvent, checkboxState };
+export { generateTodoList, sortIndex, refreshStore };
