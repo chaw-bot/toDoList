@@ -1,7 +1,7 @@
 import './style.css';
 import { sortIndex } from './status';
 import { setToLocalStorage, getFromLocalStorage, reloadToDo } from './store';
-import { addToDo, editToDo } from './addremove';
+import { addToDo, editToDo, clearAll } from './addremove';
 
 const toDoList = [];
 
@@ -52,6 +52,7 @@ window.addEventListener('load', () => {
   reloadToDo();
   addToDo();
   editToDo();
+  clearAll();
 });
 
 export { toDoList, populate };
