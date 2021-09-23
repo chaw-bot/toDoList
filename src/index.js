@@ -1,10 +1,9 @@
 import './style.css';
-
-// call list
-const list = document.querySelector('.list');
+import { checkEvent, checkboxState } from './status';
+import { setToLocalStorage, getFromLocalStorage } from './store';
 
 // task array of objects
-const toDoList = [
+export const toDoList = [
   {
     description: 'Binge Netflix',
     completed: false,
@@ -17,32 +16,41 @@ const toDoList = [
   },
   {
     description: 'Start to-do list project',
-    completed: true,
+    completed: false,
     index: 2,
   },
 ];
 
 // populate list
-const populate = () => {
-  // sort the array
-  const sortedList = toDoList.sort((x, y) => x.index - y.index);
-
-  // iterate
-  for (let i = 0; i < sortedList.length; i += 1) {
-    list.insertAdjacentHTML('beforeend', `
-      <div class="task">
-        <div>
-          <input class="check" type="checkbox" name="item-${sortedList[i].index}">
-          <label for="item-${sortedList[i].index}">${sortedList[i].description}</label>
+export const populate = () => {
+  if (getFromLocalStorage() === null) {
+    setToLocalStorage(toDoList);
+  } else {
+    const sortedList = getFromLocalStorage().sort((a, b) => a.index - b.index);
+    sortedList.sort((x, y) => x.index - y.index);
+    for (let i = 0; i < sortedList.length; i += 1) {
+      if (sortedList[i].completed === true) {
+        checkEvent(sortedList[i].index, true);
+      } else {
+        checkEvent(sortedList[i].index, false);
+      }
+      // create list item
+      const list = document.querySelector('.list');
+      list.insertAdjacentHTML('beforeend', `
+        <div class="task">
+          <div class="checks">
+            <input type="checkbox" name="item-${sortedList[i].index}" class="checkbox" ${sortedList[i].completed ? 'checked' : ''}>
+            <span class="checkmark" ${sortedList[i].completed ? 'style="text-decoration: line-through"' : ''}>${sortedList[i].description}</span>
+          </div>
+          <div class="material-icons-outlined">more_vert</div>
         </div>
-        <div class="material-icons-outlined">
-          more_vert
-        </div>
-      </div>
-
-      <hr>
-    `);
+      `);
+      checkEvent();
+    }
   }
 };
 
-window.onload = populate();
+window.onload = () => {
+  checkboxState();
+  populate();
+};
