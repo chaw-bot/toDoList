@@ -3,7 +3,7 @@ import { sortIndex } from './status';
 import { setToLocalStorage, getFromLocalStorage, reloadToDo } from './store';
 import { addToDo, editToDo } from './addremove';
 
-export const toDoList = [];
+const toDoList = [];
 
 // populate list
 const populate = (toDoList, sort) => {
@@ -53,3 +53,5 @@ window.addEventListener('load', () => {
   addToDo();
   editToDo();
 });
+
+export { toDoList, populate };
