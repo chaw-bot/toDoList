@@ -67,11 +67,13 @@ document.querySelector('.input > input').addEventListener('keypress', (e) => {
   }
 });
 
-document.getElementById('clear-all').addEventListener('click', () => {
-  const toDoList = document.getElementsByClassName('task');
-  [...toDoList].filter((toDoList) => toDoList.children[0].children[0].checked)
-    .forEach((item) => item.remove());
-  refreshStore();
-});
+const clearAll = () => {
+  document.getElementById('clear-all').addEventListener('click', () => {
+    const toDoList = document.getElementsByClassName('task');
+    [...toDoList].filter((toDoList) => toDoList.children[0].children[0].checked)
+      .forEach((item) => item.remove());
+    refreshStore();
+  });
+};
 
-export { addToDo, editToDo };
+export { addToDo, editToDo, clearAll };
