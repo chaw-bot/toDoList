@@ -1,9 +1,6 @@
 import './style.css';
-import { checkEvent } from './status';
-import { setToLocalStorage, getFromLocalStorage, checkboxState } from './store';
-
-// call list
-const list = document.querySelector('.list');
+import { checkEvent, checkboxState } from './status';
+import { setToLocalStorage, getFromLocalStorage } from './store';
 
 // task array of objects
 export const toDoList = [
