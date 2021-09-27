@@ -2,6 +2,7 @@ import './style.css';
 import { sortIndex } from './status';
 import { setToLocalStorage, getFromLocalStorage, reloadToDo } from './store';
 import { addToDo, editToDo, clearAll } from './addremove';
+import { changeBtn } from './change';
 
 const toDoList = [];
 
@@ -32,7 +33,7 @@ const populate = (toDoList, sort) => {
             <label for="item-${sortedTodo[i].index}" style="${style}" contenteditable=true>${sortedTodo[i].description}</label>
           </div>
           <div class="buttons-end">
-            <div class="material-icons-outlined">more_vert</div>
+            <div class="material-icons-outlined dots">more_vert</div>
             <span class="material-icons-outlined delete" id="item-${sortedTodo[i].index}">delete_outline</span>
           </div>
         </div>
@@ -53,6 +54,7 @@ window.addEventListener('load', () => {
   addToDo();
   editToDo();
   clearAll();
+  changeBtn();
 });
 
 export { toDoList, populate };

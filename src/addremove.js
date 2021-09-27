@@ -31,7 +31,7 @@ const appendToDo = (task) => {
             <label for="item-${task.index}" style="text-decoration: none;" contenteditable=true>${task.description}</label>
           </div>
           <div class="buttons-end">
-            <div class="material-icons-outlined">more_vert</div>
+            <div class="material-icons-outlined dots">more_vert</div>
             <span class="material-icons-outlined delete" id="item-${task.index}">delete_outline</span>
           </div>
         </div>
