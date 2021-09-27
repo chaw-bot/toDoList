@@ -1,4 +1,4 @@
-const changeBtn = () => {
+export const changeBtn = () => {
   const dots = document.querySelector('.dots');
   const deleteBtn = document.querySelector('.delete');
 
@@ -8,4 +8,4 @@ const changeBtn = () => {
   });
 };
 
-export default 'changeBtn';
+export { changeBtn };
