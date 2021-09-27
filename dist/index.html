@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/b7a7cffe76.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <title>To Do List</title>
+<script defer src="./main.js"></script></head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h3 class="title">Today's To Do</h3>
+      <i class="fa fa-refresh" id="refresh" aria-hidden="true"></i>
+    </div>
+
+    <hr>
+
+    <div class="input">
+      <input type="text" class="toDo" placeholder="Add to your list...">
+      <i class="material-icons-outlined" id="add" aria-hidden="true">keyboard_return</i>
+    </div>
+
+    <hr>
+
+    <div class="list" id="list">
+    </div>
+
+    <div class="clear">
+      <p><a href="#" id="clear-all" >Clear all completed</a></p>
+  </div>
+  </div>
+</body>
+
+</html>
