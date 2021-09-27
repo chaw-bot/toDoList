@@ -1,8 +1,8 @@
 import './style.css';
-import { sortIndex } from './status';
-import { setToLocalStorage, getFromLocalStorage, reloadToDo } from './store';
-import { addToDo, editToDo, clearAll } from './addremove';
-import { changeBtn } from './change';
+import { sortIndex } from './status.js';
+import { setToLocalStorage, getFromLocalStorage, reloadToDo } from './store.js';
+import { addToDo, editToDo, clearAll } from './addremove.js';
+import { changeBtn } from './change.js';
 
 const toDoList = [];
 
