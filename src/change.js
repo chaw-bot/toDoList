@@ -7,5 +7,3 @@ export const changeBtn = () => {
     deleteBtn.style.display = 'block';
   });
 };
-
-export { changeBtn };
