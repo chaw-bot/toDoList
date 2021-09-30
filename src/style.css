@@ -1,86 +1,100 @@
-* {
+*,
+::before,
+::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 15px;
-  line-height: 20px;
-  text-decoration: none;
 }
 
 body {
-  padding-top: 250px;
-  background-color: #f4f5f7;
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+h1 {
+  margin-bottom: 15px;
+}
+
+ul {
+  list-style: none;
+  min-height: 60px;
+}
+
+i {
+  font-size: 15px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.content,
+.title-container,
+.footer,
+li {
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 10vh;
+  padding: 7.5%;
 }
 
 .container {
-  width: 50%;
-  margin: auto;
-  background-color: #fff;
-  border-radius: 3px;
-  box-sizing: border-box;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  width: 400px;
+  box-shadow: 5px 5px 5px lightgrey;
+  border: 1px solid #787878;
 }
 
-.header {
-  display: flex;
-  padding: 1% 3% 1% 3%;
-  align-items: center;
+.title-container,
+.input-task,
+li,
+.btn-clear {
+  width: 100%;
+  height: 60px;
   justify-content: space-between;
+  padding: 10px 10px;
 }
 
-.input {
-  display: flex;
-  padding: 1% 3% 1% 3%;
-  align-items: center;
-  justify-content: space-between;
+.title-container,
+li {
+  color: #a6a6a6;
 }
 
-.toDo {
-  border-bottom: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  font-family: italics, sans-serif;
-}
-
-.task {
-  display: flex;
-  padding: 1% 3% 1% 3%;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.clear {
-  text-align: center;
-  padding: 1% 3% 1% 3%;
-  background-color: whitesmoke;
-  text-decoration: none;
-  color: dimgray;
-}
-
-hr {
-  margin: 0;
-}
-
-.input input {
-  font-style: italic;
-  outline: none;
+.input-task {
   border: none;
-  padding: 4px;
-  width: 500px;
-  background-color: #fff;
 }
 
-.delete {
-  display: none;
+.input-task:focus-within,
+.check-description input:focus-within {
+  outline: none;
 }
 
-.delete:hover {
-  cursor: pointer;
-  color: red;
+.task-list {
+  width: 100%;
+  min-height: 400px;
 }
 
-.dots:hover {
-  cursor: pointer;
-  color: blanchedalmond;
+.list-checkbox {
+  margin-right: 5px;
+}
+
+.btn-clear {
+  background-color: inherit;
+  border: none;
+  cursor: grabbing;
+}
+
+.element-border {
+  border-bottom: 1px solid #c4c4c4;
 }
