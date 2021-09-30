@@ -20,6 +20,7 @@ const clearAll = (tasksList) => {
   }
 };
 
+/* eslint-disable */
 const editTodo = (e) => {
   const currentTaskDescription = e.parentNode.firstChild.lastChild;
   descriptionBackup = e.parentNode.firstChild.replaceChild(input, currentTaskDescription);
@@ -30,5 +31,6 @@ const editTodo = (e) => {
 const deleteTask = (e) => {
   e.parentNode.parentNode.removeChild(e.parentNode);
 };
+/* eslint-enable */
 
 export { addToDo, clearAll, editTodo, deleteTask, taskInput };

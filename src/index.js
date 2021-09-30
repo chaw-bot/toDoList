@@ -1,8 +1,8 @@
+/* eslint-disable */
 import './style.css';
 import { addTaskToList, tasksList, changeStatus } from './status.js';
 import { addToDo, clearAll, editTodo, deleteTask, taskInput } from './addremove.js';
 
-/* eslint-disable */
 let taskCheckboxes = document.querySelectorAll('.list-checkbox');
 let tasksElements = document.querySelectorAll('.tasks-list li');
 const clearBtn = document.querySelector('.btn-clear');
