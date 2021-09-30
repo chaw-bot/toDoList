@@ -1,60 +1,127 @@
+/* eslint-disable */
 import './style.css';
-import { sortIndex } from './status.js';
-import { setToLocalStorage, getFromLocalStorage, reloadToDo } from './store.js';
-import { addToDo, editToDo, clearAll } from './addremove.js';
-import { changeBtn } from './change.js';
+import { addTaskToList, tasksList, changeStatus } from './status.js';
+import { addToDo, clearAll, editTodo, deleteTask, taskInput } from './addremove.js';
 
-const toDoList = [];
+let taskCheckboxes = document.querySelectorAll('.list-checkbox');
+let tasksElements = document.querySelectorAll('.tasks-list li');
+const clearBtn = document.querySelector('.btn-clear');
+const editInput = document.createElement('input');
+editInput.setAttribute('type', 'text');
 
-// populate list
-const populate = (toDoList, sort) => {
-  let sortedTodo = [];
-  if (sort) {
-    sortedTodo = toDoList.sort((a, b) => a.index - b.index);
-  } else {
-    sortedTodo = toDoList;
-  }
+let toDoList = [];
 
-  for (let i = 0; i < sortedTodo.length; i += 1) {
-    let style = '';
-    let checkbox = '';
-    if (sortedTodo[i].completed) {
-      style = 'text-decoration: line-through;';
-      checkbox = 'checked';
-    } else {
-      style = 'text-decoration: none;';
-      checkbox = '';
-    }
-    // create list item
-    document.getElementById('list').insertAdjacentHTML('beforeend', `
-        <div class="task">
-          <div class="checks">
-            <input type="checkbox" name="item-${sortedTodo[i].index}" ${checkbox}>
-            <label for="item-${sortedTodo[i].index}" style="${style}" contenteditable=true>${sortedTodo[i].description}</label>
-          </div>
-          <div class="buttons-end">
-            <div class="material-icons-outlined dots">more_vert</div>
-            <span class="material-icons-outlined delete" id="item-${sortedTodo[i].index}">delete_outline</span>
-          </div>
-        </div>
-      `);
-  }
+const getTaskData = () => {
+  toDoList = JSON.parse(localStorage.getItem('ListData') || '[]');
 };
 
-window.addEventListener('load', () => {
-  const localStore = getFromLocalStorage();
-  if (localStore == null) {
-    setToLocalStorage(toDoList, true);
-    populate(toDoList);
+const storeListData = () => {
+  localStorage.setItem('ListData', JSON.stringify(toDoList));
+};
+
+const updateCompletedToArray = (element) => {
+  const listElement = element.parentNode.parentNode;
+  if (element.checked) {
+    toDoList[parseInt(listElement.dataset.id, 10)].completed = true;
   } else {
-    const sortedTodo = sortIndex(localStore);
-    populate(sortedTodo, false);
+    toDoList[parseInt(listElement.dataset.id, 10)].completed = false;
   }
-  reloadToDo();
-  addToDo();
-  editToDo();
-  clearAll();
-  changeBtn();
+  storeListData();
+};
+
+const addListenerToBoxes = (boxes) => {
+  boxes.forEach((checkBox) => {
+    checkBox.addEventListener('click', (e) => {
+      changeStatus(e.target.checked, e.target.nextSibling);
+      updateCompletedToArray(e.target);
+    });
+  });
+};
+
+const updateCheckboxes = () => {
+  taskCheckboxes = document.querySelectorAll('.list-checkbox');
+  addListenerToBoxes(taskCheckboxes);
+};
+
+const updateArray = () => {
+  const items = [...tasksList.children];
+
+  toDoList = [];
+
+  items.forEach((item, index) => {
+    const childDiv = item.firstChild;
+    const newTask = {
+      description: childDiv.lastChild.textContent,
+      completed: childDiv.firstChild.checked,
+      index: index + 1,
+    };
+    toDoList.push(newTask);
+  });
+  storeListData();
+};
+
+const setEditListeners = (icons) => {
+  icons.forEach((icon) => {
+    icon.addEventListener('click', (e) => {
+      if (e.target.classList.contains('fa-ellipsis-v')) {
+        changeElipsisIcon(e.target);
+        toggleEdit(e.target, editInput);
+      } else {
+        deleteTask(e.target);
+        updateArray();
+      }
+    });
+  });
+};
+
+const updateTasksElements = () => {
+  tasksElements = document.querySelectorAll('.tasks-list li');
+  setEditListeners(document.querySelectorAll('.list-icon'));
+};
+
+const displayList = () => {
+  tasksList.innerHTML = '';
+  toDoList.forEach((task) => addTaskToList(task));
+  updateCheckboxes();
+  updateTasksElements();
+};
+
+const setTaskInput = () => {
+  taskInput.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+      const newInput = {
+        description: event.target.value,
+        completed: false,
+        index: toDoList.length + 1,
+      };
+      event.target.value = '';
+      addToDo(newInput, toDoList);
+      displayList();
+      storeListData();
+    }
+  });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  getTaskData();
+  storeListData();
+  setTaskInput();
+  displayList();
 });
 
-export { toDoList, populate };
+clearBtn.addEventListener('click', () => {
+  clearAll(tasksList);
+  updateArray();
+});
+
+editInput.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    changeTrashIcon(e.target);
+    editTodo(e.target);
+    if (e.target.value !== '') {
+      editTodo(e.target.value);
+      e.target.value = '';
+      updateArray();
+    }
+  }
+});

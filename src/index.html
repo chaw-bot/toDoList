@@ -4,34 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/b7a7cffe76.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
   <title>To Do List</title>
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <h3 class="title">Today's To Do</h3>
-      <i class="fa fa-refresh" id="refresh" aria-hidden="true"></i>
-    </div>
+  <main>
+    <section class="content">
+      <div class="container">
+        <div class="title-container element-border">
+          <h4>Today's list</h4>
+          <i class="fas fa-sync-alt fa-rotate-90 list-icon"></i>
+        </div>
 
-    <hr>
+        <input type="text" name="task" id="task" class="input-task element-border" placeholder="Add to your list...">
 
-    <div class="input">
-      <input type="text" class="toDo" placeholder="Add to your list...">
-      <i class="material-icons-outlined" id="add" aria-hidden="true">keyboard_return</i>
-    </div>
-
-    <hr>
-
-    <div class="list" id="list">
-    </div>
-
-    <div class="clear">
-      <p><a href="#" id="clear-all" >Clear all completed</a></p>
-  </div>
-  </div>
+        <ul class="tasks-list">
+        </ul>
+        <button type="button" class="btn-clear">Clear all completed</button>
+      </div>
+    </section>
+  </main>
+  <script src="https://kit.fontawesome.com/3f24fd37b2.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
