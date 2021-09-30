@@ -31,6 +31,6 @@ const editTodo = (e) => {
 const deleteTask = (e) => {
   e.parentNode.parentNode.removeChild(e.parentNode);
 };
-/* eslint-enable */
 
 export { addToDo, clearAll, editTodo, deleteTask, taskInput };
+/* eslint-enable */
