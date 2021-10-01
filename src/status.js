@@ -1,34 +1,37 @@
-import { setToLocalStorage } from './store.js';
+const tasksList = document.querySelector('.tasks-list');
 
-const sortIndex = (list) => {
-  for (let i = 0; i < list.length; i += 1) {
-    list[i].index = i;
+const addTaskToList = (task) => {
+  const taskItem = document.createElement('li');
+  const checkBox = document.createElement('input');
+  const taskDescription = document.createElement('label');
+  const checkDescription = document.createElement('div');
+  const icon = document.createElement('i');
+  icon.classList.add('fas', 'fa-trash', 'list-icon');
+  taskItem.classList.add('element-border');
+  taskItem.setAttribute('data-id', task.index);
+  taskItem.setAttribute('id', `Task${task.index}`);
+  taskItem.draggable = true;
+  checkBox.classList.add('list-checkbox');
+  checkBox.setAttribute('type', 'checkbox');
+  checkBox.checked = task.completed;
+  taskDescription.innerHTML = task.description;
+  if (task.completed) {
+    taskDescription.style.textDecoration = 'line-through';
   }
-  return list;
+  checkDescription.classList.add('check-description');
+  checkDescription.appendChild(checkBox);
+  checkDescription.appendChild(taskDescription);
+  taskItem.appendChild(checkDescription);
+  taskItem.appendChild(icon);
+  tasksList.appendChild(taskItem);
 };
 
-const generateTodoList = () => {
-  const list = document.getElementsByClassName('task');
-  const toDoList = [];
-  for (let i = 0; i < list.length; i += 1) {
-    const description = list[i].children[0].children[1].innerText;
-    const completed = list[i].children[0].children[0].checked;
-    const index = list[i].children[0].children[0].name.split('-')[1];
-
-    toDoList.push({
-      description,
-      completed,
-      index,
-    });
+const changeStatus = (bool, label) => {
+  if (bool) {
+    label.style.textDecoration = 'line-through';
+  } else {
+    label.style.textDecoration = 'none';
   }
-  return toDoList;
 };
 
-const refreshStore = () => {
-  const todoList = generateTodoList();
-  const sortedList = sortIndex(todoList);
-
-  setToLocalStorage(sortedList);
-};
-
-export { generateTodoList, sortIndex, refreshStore };
+export { addTaskToList, changeStatus, tasksList };
